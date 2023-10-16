@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import data from "../data.json";
-import Find_cordinates from "../components/Find_cordinates";
-import { geocode } from "opencage-api-client";
-import * as geolib from "geolib";
+import { calculateDistance, getDistance } from "../components/distanceUtils";
+
 const Search = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,40 +18,15 @@ const Search = () => {
   const filteredData =
     filter === "All" ? data : data.filter((item) => item.name === filter);
 
-  const calculateDistance = async () => {
-    try {
-      const response1 = await geocode({
-        q: location1,
-        key: "95fd772c089446228e9a266ae42c80b5",
-      });
-      const response2 = await geocode({
-        q: location2,
-        key: "95fd772c089446228e9a266ae42c80b5",
-      });
+  useEffect(() => {
+    const fetchData = async () => {
+      const distance = await calculateDistance(location1, location2);
+      setTravelDistance(distance);
+    };
 
-      const coords1 = response1.results[0].geometry;
-      const coords2 = response2.results[0].geometry;
+    fetchData();
+  }, [location1, location2]);
 
-      const distance = getDistance(coords1, coords2);
-      // console.log(distance);
-      setTravelDistance(distance / 1000);
-      // setTravelDistance(parseFloat((distance / 1000).toFixed(2)));
-      // console.log(
-      //   `Distance between ${location1} and ${location2}: ${distance / 1000} km`
-      // );
-    } catch (error) {
-      console.error("Error geocoding locations:", error.message);
-    }
-  };
-  const getDistance = (coord1, coord2) => {
-    // Calculate distance using your preferred method (e.g., Haversine formula)
-    // For simplicity, I'll use geolib's getDistance here.
-    return geolib.getDistance(coord1, coord2);
-  };
-  useState(() => {
-    calculateDistance();
-  }, []);
-  // console.log(travelDistance);
   const handleOnclick = (itemName, itemPrice) => {
     let data = { ...searchData, name: itemName, price: itemPrice };
     // console.log(data);
