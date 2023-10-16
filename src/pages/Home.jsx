@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import data from "../data.json";
-import Search from "./search";
+
 // import FindCoordinates from "../components/FindCoordinates";
 
 const Home = () => {
