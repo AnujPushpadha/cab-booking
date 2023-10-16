@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Economy",
+    "price": 10,
+    "image": "https://imgd-ct.aeplcdn.com/664x415/n/cw/ec/112763/tiago-right-front-three-quarter-2.jpeg?isig=0&q=80"
+  },
+  {
+    "name": "Premium",
+    "price": 15,
+    "image": "https://www.enterprise.com/content/dam/ecom/utilitarian/common/exotics/us-refresh/car-thumbnails/thumbnail-2021-audi-a6-2048x1360.png.img.wrend.480.270.png"
+  },
+  {
+    "name": "Luxury",
+    "price": 30,
+    "image": "https://www.enterprise.com/content/dam/ecom/utilitarian/common/exotics/us-refresh/car-thumbnails/thumbnail-2021-jaguar-xf-2048x1360.png.img.wrend.480.270.png"
+  }
+]
